@@ -1,6 +1,6 @@
 # 🔗 URL Shortener
 
-A **production-grade**, **open-source** URL shortening service inspired by Bitly and TinyURL. Built using scalable **Spring Boot microservices** (Maven), **Angular 20**, **TailwindCSS**, **MongoDB**, and **MySQL** for an elegant full-stack experience.
+A **production-grade**, **open-source** URL shortening service inspired by Bitly and TinyURL. Built using scalable **Spring Boot microservices** (Maven), **Angular 20**, **TailwindCSS**, **MongoDB Atlas**, and **MySQL** for an elegant full-stack experience.
 
 ![Architecture](docs/system-design.png)
 
@@ -13,7 +13,7 @@ The system consists of three backend microservices that work in coordination to 
 ### 🔹 1. User Service
 
 * Accepts long URLs from users
-* Interacts with **MongoDB** to store user data, long URLs, short URLs, and expiration dates
+* Interacts with **MongoDB Atlas** to store user data, long URLs, short URLs, and expiration dates
 * Calls the `url-generator` service to get a fresh unused hash
 
 ### 🔹 2. URL Generator Service
@@ -34,7 +34,7 @@ This model keeps hash generation deterministic, consistent, and scalable across 
 ## 🌟 Features
 
 * 🔐 Unique & reusable hash key generation (SHA/MD5)
-* 📦 URL/document store in MongoDB
+* 📦 URL/document store in MongoDB Atlas
 * 🗃️ Hash metadata in SQL (MySQL/PostgreSQL)
 * 🧹 Cleaner service to remove expired URLs and recycle hashes
 * 🚀 Built with microservices: modular and scalable
@@ -48,14 +48,14 @@ This model keeps hash generation deterministic, consistent, and scalable across 
 
 ### Microservices
 
-* **User Service** – Handles long/short URL mapping, MongoDB persistence
+* **User Service** – Handles long/short URL mapping, MongoDB Atlas persistence
 * **URL Generator Service** – Generates and manages unique short hashes
 * **Cleaner Service** – Cleans expired hashes and recycles them
 * **API Gateway** – Routes and secures external traffic
 
 ### Data Stores
 
-* **MongoDB** – Stores user-specific long URLs & metadata
+* **MongoDB Atlas** – Stores user-specific long URLs & metadata
 * **MySQL/PostgreSQL** – Stores hash keys and status (`used: true | false`)
 
 ---
@@ -67,7 +67,7 @@ This model keeps hash generation deterministic, consistent, and scalable across 
 * Java 17+
 * Spring Boot (Maven)
 * Spring Data JPA
-* MongoDB, MySQL/PostgreSQL
+* MongoDB Atlas, MySQL/PostgreSQL
 * Spring Cloud Gateway
 
 ### Frontend
@@ -119,11 +119,15 @@ npm install
 ng serve --open
 ```
 
-### 🛢️ Start MongoDB (Docker)
+### 🛢️ Connect to MongoDB Atlas
 
-```bash
-docker run -d -p 27017:27017 --name mongo mongo
+Make sure your MongoDB URI (from Atlas) is set in the `application.properties` or `application.yml` of `user-service` like so:
+
+```properties
+spring.data.mongodb.uri=mongodb+srv://<username>:<password>@cluster0.mongodb.net/urlshortener?retryWrites=true&w=majority
 ```
+
+Ensure IP access and credentials are properly configured in your MongoDB Atlas dashboard.
 
 ---
 
@@ -153,7 +157,7 @@ Redirects to the original long URL.
 
 ## 🧠 Database Schemas
 
-### MongoDB (Document Store)
+### MongoDB Atlas (Document Store)
 
 ```json
 {
