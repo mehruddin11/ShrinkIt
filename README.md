@@ -6,12 +6,37 @@ A **production-grade**, **open-source** URL shortening service inspired by Bitly
 
 ---
 
+## 🧠 How It Works
+
+The system consists of three backend microservices that work in coordination to generate and manage short URLs efficiently:
+
+### 🔹 1. User Service
+
+* Accepts long URLs from users
+* Interacts with **MongoDB** to store user data, long URLs, short URLs, and expiration dates
+* Calls the `url-generator` service to get a fresh unused hash
+
+### 🔹 2. URL Generator Service
+
+* Interacts with **SQL (MySQL/PostgreSQL)** to store and fetch reusable hash keys
+* On request, provides a unique hash where `used = false`
+* Once returned, the user-service maps it with the user's long URL
+
+### 🔹 3. Cleaner Service
+
+* Periodically scans expired URLs
+* Marks expired hash keys as `used = false` in the SQL DB so they can be reused
+
+This model keeps hash generation deterministic, consistent, and scalable across millions of users.
+
+---
+
 ## 🌟 Features
 
 * 🔐 Unique & reusable hash key generation (SHA/MD5)
 * 📦 URL/document store in MongoDB
 * 🗃️ Hash metadata in SQL (MySQL/PostgreSQL)
-* 🧹 Cleaner service to remove expired URLs
+* 🧹 Cleaner service to remove expired URLs and recycle hashes
 * 🚀 Built with microservices: modular and scalable
 * 🎨 Responsive frontend with Angular 20 + TailwindCSS
 * ⚡ Redis-ready for caching (LRU-style)
@@ -23,14 +48,15 @@ A **production-grade**, **open-source** URL shortening service inspired by Bitly
 
 ### Microservices
 
-* **API Gateway** – Entry point using Spring Cloud Gateway
-* **URL Generator Service** – Generates short hashes from long URLs
-* **Cleaner Service** – Reclaims expired hashes periodically
+* **User Service** – Handles long/short URL mapping, MongoDB persistence
+* **URL Generator Service** – Generates and manages unique short hashes
+* **Cleaner Service** – Cleans expired hashes and recycles them
+* **API Gateway** – Routes and secures external traffic
 
 ### Data Stores
 
 * **MongoDB** – Stores user-specific long URLs & metadata
-* **MySQL/PostgreSQL** – Stores hash keys and status (active/inactive)
+* **MySQL/PostgreSQL** – Stores hash keys and status (`used: true | false`)
 
 ---
 
@@ -48,7 +74,7 @@ A **production-grade**, **open-source** URL shortening service inspired by Bitly
 
 * Angular 20
 * Tailwind CSS
-* Angular CLI (no Node.js backend)
+* Angular CLI (Requires Node.js v20+)
 
 ### DevOps
 
@@ -63,6 +89,7 @@ A **production-grade**, **open-source** URL shortening service inspired by Bitly
 
 * Java 17 or higher
 * Angular CLI (`npm install -g @angular/cli`)
+* Node.js 20+
 * Docker
 
 ### 📥 Clone Repository
@@ -77,7 +104,11 @@ cd url-shortener
 ```bash
 cd backend
 mvn clean install
-mvn spring-boot:run
+
+# Start services individually
+cd user-service && mvn spring-boot:run
+cd ../url-generator && mvn spring-boot:run
+cd ../cleaner-service && mvn spring-boot:run
 ```
 
 ### 🌐 Frontend Setup
@@ -170,8 +201,8 @@ We welcome contributions from everyone!
 ```
 url-shortener/
 ├── backend/                # Spring Boot services
-│   ├── url-service/
 │   ├── user-service/
+│   ├── url-generator/
 │   ├── cleaner-service/
 │   └── api-gateway/
 ├── frontend/
@@ -196,8 +227,8 @@ This project is licensed under the MIT License. See [LICENSE](LICENSE) for more 
 
 ## 💡 Roadmap / Future Enhancements
 
-*   QR Code generation
-*   Custom aliases
+* QR Code generation
+* Custom aliases
 * 📈 Analytics dashboard
 * ⏱️ URL expiration logic
 * 🔐 Rate limiting & abuse protection
