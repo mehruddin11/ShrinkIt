@@ -1,0 +1,226 @@
+/* about.css */
+.login-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    position: relative;
+    overflow: hidden;
+    padding: 2rem;
+  }
+  
+  .login-form {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 28rem;
+    z-index: 2;
+    position: relative;
+  }
+  
+  .form-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .form-header h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  
+  .text-gradient {
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  
+  .form-header p {
+    color: #64748b;
+    font-size: 0.875rem;
+  }
+  
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  .form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #334155;
+  }
+  
+  .form-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    transition: all 0.3s ease;
+  }
+  
+  .form-input:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  }
+  
+  .input-error {
+    border-color: #ef4444 !important;
+  }
+  
+  .input-valid {
+    border-color: #10b981 !important;
+  }
+  
+  .error-messages small {
+    display: block;
+    margin-top: 0.25rem;
+    color: #ef4444;
+    font-size: 0.75rem;
+  }
+  
+  .password-wrapper {
+    position: relative;
+  }
+  
+  .password-toggle {
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.25rem;
+    color: #64748b;
+  }
+  
+  .submit-btn {
+    width: 100%;
+    padding: 0.75rem;
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+  }
+  
+  .submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
+  }
+  
+  .submit-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+  
+  .btn-wave {
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    transform: scale(0);
+    animation: wave 1s ease-out;
+    opacity: 0;
+  }
+  
+  @keyframes wave {
+    to {
+      transform: scale(10);
+      opacity: 0;
+    }
+  }
+  
+  .form-footer {
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 0.875rem;
+    color: #64748b;
+  }
+  
+  .form-footer a {
+    color: #3b82f6;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  .form-footer a:hover {
+    text-decoration: underline;
+  }
+  
+  .floating-shapes {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+  }
+  
+  .shape {
+    position: absolute;
+    opacity: 0.1;
+  }
+  
+  .circle {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    top: 20%;
+    left: 10%;
+  }
+  
+  .triangle {
+    width: 0;
+    height: 0;
+    border-left: 75px solid transparent;
+    border-right: 75px solid transparent;
+    border-bottom: 150px solid #8b5cf6;
+    top: 50%;
+    right: 15%;
+  }
+  
+  .square {
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+    bottom: 10%;
+    left: 50%;
+  }
+  
+  /* Typing animation */
+  .animate-typing {
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 2px solid transparent;
+    animation: typing 3.5s steps(30, end), blink-caret 0.75s step-end infinite;
+  }
+  
+  @keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+  }
+  
+  @keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: #3b82f6 }
+  }

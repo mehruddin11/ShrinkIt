@@ -1,1 +1,79 @@
-<p>about works!</p>
+
+<div class="login-container" #loginContainer>
+    <form 
+      [formGroup]="form" 
+      (ngSubmit)="handleSubmit()" 
+      class="login-form animate__animated"
+      #loginForm
+    >
+      <div class="form-header">
+        <h2 class="text-gradient">Welcome Back</h2>
+        <p class="animate-typing">Sign in to shorten your links</p>
+      </div>
+  
+      <div class="form-group">
+        <label for="email" class="form-label">Email</label>
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          [ngClass]="{
+            'input-error': form.get('email')?.invalid && form.get('email')?.touched,
+            'input-valid': form.get('email')?.valid
+          }"
+          class="form-input"
+          placeholder="Enter your email"
+          autocomplete="email"
+        />
+        <div class="error-messages">
+          <small *ngIf="form.get('email')?.errors?.['required'] && form.get('email')?.touched">
+            Email is required
+          </small>
+          <small *ngIf="form.get('email')?.errors?.['email'] && !form.get('email')?.errors?.['required'] && form.get('email')?.touched">
+            Please enter a valid email
+          </small>
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="password" class="form-label">Password</label>
+        <div class="password-wrapper">
+          <input
+            id="password"
+            type="password"
+            formControlName="password"
+            [ngClass]="{
+              'input-error': form.get('password')?.invalid && form.get('password')?.touched,
+              'input-valid': form.get('password')?.valid
+            }"
+            class="form-input"
+            placeholder="Enter your password"
+            autocomplete="current-password"
+          />
+          <button type="button" class="password-toggle" (click)="togglePasswordVisibility()">
+            👁️
+          </button>
+        </div>
+        <div class="error-messages">
+          <small *ngIf="form.get('password')?.errors?.['required'] && form.get('password')?.touched">
+            Password is required
+          </small>
+        </div>
+      </div>
+  
+      <button type="submit" class="submit-btn" [disabled]="form.invalid">
+        <span>Login</span>
+        <span class="btn-wave"></span>
+      </button>
+  
+      <div class="form-footer">
+        <p>Don't have an account? <a routerLink="/register">Sign up</a></p>
+      </div>
+    </form>
+  
+    <div class="floating-shapes">
+      <div class="shape circle"></div>
+      <div class="shape triangle"></div>
+      <div class="shape square"></div>
+    </div>
+  </div>
