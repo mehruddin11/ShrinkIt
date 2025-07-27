@@ -114,9 +114,9 @@ cd ../cleaner-service && mvn spring-boot:run
 ### 🌐 Frontend Setup
 
 ```bash
-cd frontend/angular-app
+cd frontend/shrinkit
 npm install
-ng serve
+ng serve --open
 ```
 
 ### 🛢️ Start MongoDB (Docker)
