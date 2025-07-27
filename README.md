@@ -96,7 +96,7 @@ This model keeps hash generation deterministic, consistent, and scalable across 
 
 ```bash
 git clone https://github.com/<your-username>/url-shortener.git
-cd url-shortener
+cd ShrinkIt
 ```
 
 ### 🚀 Backend Setup
