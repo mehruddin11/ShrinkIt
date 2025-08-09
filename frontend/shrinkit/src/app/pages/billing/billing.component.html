@@ -1,0 +1,113 @@
+<div class="min-h-screen bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- Header -->
+    <div class="text-center mb-12">
+      <h1 class="text-3xl font-bold text-gray-900">Choose Your Plan</h1>
+      <p class="text-gray-600 mt-2 max-w-2xl mx-auto">
+        Select the perfect plan for your URL shortening needs. Upgrade or downgrade at any time.
+      </p>
+    </div>
+
+    <!-- Current Plan Info -->
+    <div *ngIf="currentUser" class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-8">
+      <div class="flex items-center">
+        <div class="flex-shrink-0">
+          <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+        </div>
+        <div class="ml-3">
+          <p class="text-sm text-blue-700">
+            You are currently on the <strong class="capitalize">{{ currentUser.plan }}</strong> plan.
+            <span *ngIf="currentUser.plan !== 'free'">Your next billing date is January 15, 2024.</span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pricing Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+      <div 
+        *ngFor="let plan of plans" 
+        class="relative bg-white rounded-2xl shadow-sm border-2 transition-all hover:shadow-lg"
+        [class.border-blue-500]="plan.popular"
+        [class.border-gray-200]="!plan.popular"
+      >
+        <!-- Popular Badge -->
+        <div *ngIf="plan.popular" class="absolute -top-4 left-1/2 transform -translate-x-1/2">
+          <span class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-1 rounded-full text-sm font-medium">
+            Most Popular
+          </span>
+        </div>
+
+        <div class="p-8">
+          <!-- Plan Header -->
+          <div class="text-center mb-8">
+            <h3 class="text-2xl font-bold text-gray-900">{{ plan.name }}</h3>
+            <div class="mt-4">
+              <span class="text-4xl font-bold text-gray-900">${{ plan.price }}</span>
+              <span class="text-gray-500">/ {{ plan.period }}</span>
+            </div>
+          </div>
+
+          <!-- Features -->
+          <ul class="space-y-4 mb-8">
+            <li *ngFor="let feature of plan.features" class="flex items-start">
+              <svg class="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span class="text-gray-700">{{ feature }}</span>
+            </li>
+          </ul>
+
+          <!-- Action Button -->
+          <button
+            (click)="selectPlan(plan.id)"
+            [disabled]="isPlanActive(plan.id) || isLoading"
+            [class.bg-gradient-to-r]="plan.popular && !isPlanActive(plan.id)"
+            [class.from-blue-600]="plan.popular && !isPlanActive(plan.id)"
+            [class.to-purple-600]="plan.popular && !isPlanActive(plan.id)"
+            [class.bg-gray-900]="!plan.popular && !isPlanActive(plan.id)"
+            [class.bg-gray-300]="isPlanActive(plan.id)"
+            [class.cursor-not-allowed]="isPlanActive(plan.id)"
+            class="w-full text-white py-3 px-6 rounded-lg font-medium transition-all hover:opacity-90 disabled:opacity-50"
+          >
+            <span *ngIf="!isLoading || selectedPlan !== plan.id">
+              {{ getPlanButtonText(plan.id) }}
+            </span>
+            <span *ngIf="isLoading && selectedPlan === plan.id" class="flex items-center justify-center">
+              <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              Processing...
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-6 text-center">Frequently Asked Questions</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-2">Can I change my plan anytime?</h3>
+          <p class="text-gray-600 text-sm">Yes, you can upgrade or downgrade your plan at any time. Changes take effect immediately.</p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-2">What happens to my URLs if I downgrade?</h3>
+          <p class="text-gray-600 text-sm">Your existing URLs will continue to work, but you'll be limited by your new plan's features.</p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-2">Do you offer refunds?</h3>
+          <p class="text-gray-600 text-sm">We offer a 30-day money-back guarantee for all paid plans. No questions asked.</p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-2">Is there a setup fee?</h3>
+          <p class="text-gray-600 text-sm">No setup fees. You only pay the monthly or annual subscription fee for your chosen plan.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

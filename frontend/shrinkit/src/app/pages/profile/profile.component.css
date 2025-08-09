@@ -1,0 +1,28 @@
+/* Profile page specific styles */
+.tab-transition {
+  transition: all 0.3s ease;
+}
+
+.avatar-upload {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.avatar-upload input[type=file] {
+  position: absolute;
+  left: -9999px;
+}
+
+.danger-zone {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
