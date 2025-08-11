@@ -1,0 +1,21 @@
+/* Billing page specific styles */
+.pricing-card {
+  transition: all 0.3s ease;
+}
+
+.pricing-card:hover {
+  transform: translateY(-4px);
+}
+
+.popular-badge {
+  animation: pulse 2s infinite;
+}
+
+.plan-button {
+  transition: all 0.2s ease;
+}
+
+.plan-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}

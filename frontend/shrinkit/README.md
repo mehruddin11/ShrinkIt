@@ -1,98 +1,60 @@
-# Shrinkit - Frontend (Angular 20 + Tailwind CSS)
+🗂️ Complete Routing Structure
+Main Routes:
 
-This is the frontend for the **Shrinkit** URL Shortener project. It is built using **Angular 20.1.3** and styled with **Tailwind CSS** for modern, responsive UI.
+/ - Home page with URL shortener
+/login - Professional sign-in page
+/register - Get started registration page
+/dashboard - URL management dashboard
+/analytics - Detailed analytics and reporting
+/profile - User profile settings
+/billing - Plan management and billing
+🔐 Authentication System
+Auth Guard: Protects authenticated routes
+Demo Credentials:
 
----
+Email: admin@demo.com
+Password: password123
+Features:
 
-## 🚀 Development Server
+Form validation with real-time feedback
+Password visibility toggle
+Loading states and error handling
+Responsive design
+📊 Complete Feature Set
+Dashboard:
 
-To start a local development server, run:
+URL management with statistics
+Click tracking and performance metrics
+Copy-to-clipboard functionality
+Delete and manage URLs
+Analytics:
 
-```bash
-npm install
-tailwindcss -i ./src/styles.css -o ./src/output.css --watch &
-ng serve
-```
+Visual click charts and performance data
+Time period filtering (24h, 7d, 30d, 90d)
+Top performing URLs
+Comprehensive metrics
+Profile Management:
 
-Then open your browser at [http://localhost:4200](http://localhost:4200). The application will auto-reload when source files are modified.
+Personal information updates
+Password change functionality
+Account deletion (danger zone)
+Tabbed interface
+Billing System:
 
----
+Three-tier pricing (Free, Premium, Enterprise)
+Plan comparison and upgrade/downgrade
+Current plan status
+FAQ section
+🎨 Professional UI/UX
+Design Features:
 
-## 🧱 Code Scaffolding
+Consistent gradient themes and modern styling
+Responsive design for all screen sizes
+Smooth animations and transitions
+Loading states and micro-interactions
+Professional form validation
+Demo Data:
 
-Angular CLI supports powerful code generation tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-View all available schematics:
-
-```bash
-ng generate --help
-```
-
----
-
-## 🛠️ Building for Production
-
-To compile the application for production:
-
-```bash
-ng build
-```
-
-The build artifacts will be stored in the `dist/` directory. This build is optimized for speed and performance.
-
----
-
-## ✅ Running Unit Tests
-
-Use the [Karma](https://karma-runner.github.io) test runner:
-
-```bash
-ng test
-```
-
----
-
-## 🧪 Running End-to-End Tests
-
-End-to-end (e2e) testing can be executed with:
-
-```bash
-ng e2e
-```
-
-Note: Angular CLI no longer includes a default e2e framework. You can integrate with tools like **Cypress**, **Playwright**, or **Protractor**.
-
----
-
-## 🌐 Environment Setup
-
-Create a `.env` file or edit your `environment.ts` to set your backend API URL:
-
-```ts
-export const environment = {
-  production: false,
-  apiUrl: 'http://localhost:8080/api'
-};
-```
-
----
-
-## 📚 Additional Resources
-
-* [Angular CLI Documentation](https://angular.dev/tools/cli)
-* [Tailwind CSS Docs](https://tailwindcss.com/docs)
-* [Angular + Tailwind Setup Guide](https://tailwindcss.com/docs/guides/angular)
-
----
-
-## 🤝 Contributing
-
-If you’d like to contribute to the frontend of Shrinkit, check out the main [Shrinkit README](../README.md) for contribution guidelines, architecture, and backend integration.
-
----
-
-© 2025 Shrinkit Team
+All services now use mock data instead of real APIs
+Realistic demo content for testing
+Simulated loading delays for authentic feel
